@@ -1,0 +1,1 @@
+export var add="haha";
