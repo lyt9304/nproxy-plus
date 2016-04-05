@@ -22,6 +22,7 @@
     "request": "2.44.0",
     "step": "*",
     "stylus": "^0.54.2",
+    "underscore": "^1.8.3",
     "webpack": "^1.12.14"
   },
   "devDependencies": {

@@ -14,10 +14,19 @@ module.exports = [
 
   //css文件夹替换(dir,b)
   {
-    pattern : 'web/css/',
+    pattern : "web/css/",
     responder : 'local',
     options : {
       file: path.join(replacedDir, 'css')
+    }
+  },
+
+  //pattern使用正则表达式
+  {
+    pattern : /web\/css\/b.*\.css/g,
+    responder : 'local',
+    options : {
+      file: path.join(replacedDir, 'css', 'bstar.css')
     }
   },
 
@@ -32,7 +41,7 @@ module.exports = [
 
   //本地concat
   {
-    pattern : 'web/scripts/concat.js',
+    pattern : 'web/scripts/concat1.js',
     responder : 'concat',
     options : {
       dir : path.join(replacedDir, 'scripts'),
@@ -41,6 +50,20 @@ module.exports = [
         'c2.js',
         'c3.js',
         'c1.js'
+      ]
+    }
+  },
+
+  //
+  {
+    pattern : 'web/scripts/concat2.js',
+    responder : 'concat',
+    options : {
+      files: [
+        path.join(replacedDir, 'scripts', 'c1.js'),
+        path.join(replacedDir, 'scripts', 'c2.js'),
+        path.join(replacedDir, 'scripts', 'c3.js'),
+        path.join(replacedDir, 'scripts', 'c4.js')
       ]
     }
   },
