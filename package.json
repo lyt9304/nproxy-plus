@@ -1,27 +1,37 @@
 {
   "name": "nproxy-plus",
   "author": "xiaocong.hxc <xiaocong.hxc@qq.com>",
-  "contributors" : [
+  "contributors": [
     "Goddy Zhao <goddy128@gmail.com> (http://goddyzhao.me)"
   ],
   "version": "1.6.3",
   "description": "A cli proxy tool specialized in file replacing, extend from nproxy",
   "dependencies": {
-    "express": "4.9.4",
-    "commander": "*",
-    "mime": "*",
-    "step": "*",
+    "async": "0.9.0",
+    "babel-core": "^6.7.4",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.7.4",
+    "babel-preset-es2015": "^6.6.0",
     "combo-handler": "1.0.1",
+    "commander": "*",
+    "express": "4.9.4",
     "kmc": "1.0.41",
-    "request" : "2.44.0",
-    "async" : "0.9.0"
+    "memory-fs": "^0.3.0",
+    "mime": "*",
+    "nib": "^1.1.0",
+    "request": "2.44.0",
+    "step": "*",
+    "stylus": "^0.54.2",
+    "webpack": "^1.12.14"
   },
-  "devDependencies":{
+  "devDependencies": {
     "mocha": "*",
     "should": "*"
   },
   "main": "./lib/nproxy",
-  "bin": {"nproxy": "./bin/nproxy"},
+  "bin": {
+    "nproxy": "./bin/nproxy"
+  },
   "scripts": {
     "test": "make test"
   },
