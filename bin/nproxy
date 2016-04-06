@@ -3,21 +3,42 @@
 var program = require('commander');
 var nproxy = require('../');
 var conf = require('../package.json');
+var fs = require('fs');
+var envConfig = require('../config-test');
+var path = require('path');
 
 program
   .version(conf.version)
+  .option('--root [root]', 'Set the root of Haojing develop workspace, like /path-to-haojing/haojing')
+  .option('--user [name]', 'Set your developer username, it is same with s.{username}.baixing.cn')
   .option('-l, --list [list]', 'Specify the replace rule file')
   .option('-p, --port [port]', 'Specify the port nproxy will listen on(8989 by default)', parseInt)
   .option('-t, --timeout [timeout]', 'Specify the request timeout(5 seconds by default)', parseInt)
   .option('-w, --watch [path]', 'Specify the watch path, whose changed will cause replace rule file reload)')
   .option('-d, --debug', 'Enable debug mode')
-  .option('-n, --networks', 'Display network interface list')
+  .option('--live', 'Enable Live-reload')
   .parse(process.argv);
+
+if(program.root || program.user){
+
+  if(program.root){
+    envConfig["HAOJING_PATH_ROOT"] = program.root;
+  }
+
+  if(program.user){
+    envConfig["HAOJING_USERNAME"] = program.user;
+  }
+
+  var configStr = "module.exports = " + JSON.stringify(envConfig);
+
+  fs.writeFileSync(path.resolve(__dirname, "../config-test.js"), configStr);
+
+}
 
 nproxy(program.port, {
   "responderListFilePath": program.list,
   "watchPath": program.watch,
   "timeout": program.timeout,
   "debug": !!program.debug,
-  "networks": program.networks
+  "live": !!program.live
 });
