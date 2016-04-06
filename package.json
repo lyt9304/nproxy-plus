@@ -21,13 +21,14 @@
     "mime": "*",
     "nib": "^1.1.0",
     "request": "2.44.0",
+    "rollup": "^0.25.7",
+    "rollup-plugin-commonjs": "^2.2.1",
+    "rollup-plugin-node-resolve": "^1.5.0",
+    "socket.io": "^1.4.5",
     "step": "*",
     "stylus": "^0.54.2",
     "underscore": "^1.8.3",
-    "webpack": "^1.12.14",
-    "rollup": "^0.25.7",
-    "rollup-plugin-commonjs": "^2.2.1",
-    "rollup-plugin-node-resolve": "^1.5.0"
+    "webpack": "^1.12.14"
   },
   "devDependencies": {
     "mocha": "*",

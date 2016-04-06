@@ -7,8 +7,9 @@ var haojingRule = path.join(__dirname, 'haojing.replace-rule.js');
 var options = {
   timeout: 10,
   debug: true,
-  responderListFilePath: testReplaceListPath
-  //responderListFilePath: haojingRule
+  live: true,
+  //responderListFilePath: testReplaceListPath
+  responderListFilePath: haojingRule
 };
 
 var port = 8989;

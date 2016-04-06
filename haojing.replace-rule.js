@@ -7,15 +7,16 @@ var url = require('url');
 var log = require('./lib/log');
 
 var resSemicolon = path.join(__dirname, 'semicolon.js');
+var resSocketClient = path.join(__dirname, 'socket-client.js');
 
 // config
 var env = require('./haojing.env-config.js');
 var username = env.HAOJING_USERNAME;
+var isLive = env.HAOJING_IS_LIVE;
 var pathStatic = path.join(env.HAOJING_PATH_ROOT, env.HAOJING_PATH_STATIC);
 var pathAssets = path.join(env.HAOJING_PATH_ROOT, env.HAOJING_PATH_ASSETS);
 var jsComboConfig = path.join(pathAssets, env.HAOJING_JS_COMBO_CONFIG);
-var stylusPath = path.join(env.HAOJING_PATH_ROOT, env.HAOJING_PATH_ASSETS, '/mobile', 'css');
-
+var stylusPath = path.join(env.HAOJING_PATH_ROOT, env.HAOJING_PATH_ASSETS, 'mobile', 'css');
 
 // url
 var hostReqStatic = 'http://s.' + username + '.baixing.cn/';
@@ -59,8 +60,14 @@ _.each(mapping, function (value, key) {
   _.each(value, function (item) {
     list.push(path.join(pathAssets, item));
     // append a semicolon to each js file
-    list.push(resSemicolon)
+    list.push(resSemicolon);
   });
+
+  //if live-reload is on, append socket-client to lib.js
+  if(isLive && key.indexOf('lib.js')!=-1){
+    list.push(resSocketClient);
+  }
+
   rule.options.files = list;
 
   mappingRules.push(rule);
@@ -101,8 +108,8 @@ var ruleFavicon = {
 // [proxy] -->	http://127.0.0.1:{STYLUS_SRV_PORT}/w/$1.css
 var patternWapAssets = reqWapAssets
     .split('/').join('\\/')	// `/` -> `\/`
-    .split('.').join('\\.')	// `.` -> `\.`
-  + '(.+)\.css';
+    .split('.').join('\\.');	// `.` -> `\.`
+  //+ '(.+)\.css';
 var reReqWapAssets = new RegExp(patternWapAssets);
 var ruleWapAssets = {
   pattern: reReqWapAssets,

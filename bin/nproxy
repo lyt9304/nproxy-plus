@@ -19,7 +19,7 @@ program
   .option('--live', 'Enable Live-reload')
   .parse(process.argv);
 
-if(program.root || program.user){
+if(program.root || program.user || !!program.live){
 
   if(program.root){
     envConfig["HAOJING_PATH_ROOT"] = program.root;
@@ -29,11 +29,22 @@ if(program.root || program.user){
     envConfig["HAOJING_USERNAME"] = program.user;
   }
 
+  if(!!program.live){
+    envConfig["HAOJING_IS_LIVE"] = true;
+  }else{
+    envConfig["HAOJING_IS_LIVE"] = false;
+  }
+
   var configStr = "module.exports = " + JSON.stringify(envConfig);
 
-  fs.writeFileSync(path.resolve(__dirname, "../config-test.js"), configStr);
+  fs.writeFileSync(path.resolve(__dirname, "../haojing.env-config.js"), configStr);
 
 }
+
+//TODO:检查一下,如果没配置环境,还是空字符串要报错
+
+//console.log(!!program.live);
+//console.log(program.list);
 
 nproxy(program.port, {
   "responderListFilePath": program.list,
