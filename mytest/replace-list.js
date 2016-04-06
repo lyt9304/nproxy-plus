@@ -102,6 +102,15 @@ module.exports = [
     options : {
       file: path.join(replacedDir, 'stylus')
     }
+  },
+
+  //rollup打包
+  {
+    pattern : 'web/rollup/main.js',
+    responder : 'rollup',
+    options : {
+      file: path.join(replacedDir, 'rollup', 'main.js')
+    }
   }
 
 ];
