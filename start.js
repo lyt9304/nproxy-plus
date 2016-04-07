@@ -8,8 +8,8 @@ var options = {
   timeout: 10,
   debug: true,
   live: true,
-  //responderListFilePath: testReplaceListPath
-  responderListFilePath: haojingRule
+  responderListFilePath: testReplaceListPath
+  //responderListFilePath: haojingRule
 };
 
 var port = 8989;
